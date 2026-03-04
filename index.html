@@ -6,23 +6,7 @@
 <title>Happy Birthday Puja 🎂</title>
 
 <style>
-/* MAKE PAGE 4 SCROLLABLE */
-#page4{
-   position:absolute;
-   top:0;
-   left:0;
-   width:100%;
-   height:100vh;
 
-   display:flex;
-   flex-direction:column;
-
-   justify-content:flex-start;   /* 👈 important */
-   align-items:center;
-
-   overflow-y:auto;              /* 👈 enables scroll */
-   padding:60px 20px 40px;
-}
 /* GLOBAL */
 body{
 margin:0;
@@ -202,7 +186,7 @@ animation:bouquetPop 1.2s ease forwards;
 
 .candle{
 width:6px;
-height:20px;
+height:28px;
 background:#ffffff;
 border-radius:2px;
 position:relative;
@@ -211,7 +195,7 @@ box-shadow:0 0 6px rgba(255,255,255,.9);
 
 .flame{
 position:absolute;
-top:-10px;
+top:-14px;
 left:50%;
 transform:translateX(-50%);
 width:10px;
@@ -345,7 +329,7 @@ Tap anywhere on the page to begin the birthday countdown and unlock the surprise
 /* Candle body */
 .candle{
   width:6px;
-  height:28px;
+  height:20px;
   background:#ffffff;
   border-radius:2px;
   position:relative;
@@ -355,7 +339,7 @@ Tap anywhere on the page to begin the birthday countdown and unlock the surprise
 /* Flame */
 .flame{
   position:absolute;
-  top:-14px;
+  top:-10px;
   left:50%;
   transform:translateX(-50%);
   width:10px;
@@ -451,7 +435,7 @@ This is the first of many birthdays I hope to wish you 🎂
 </div>
 
 <div class="page" id="page9">
-<h2>A small gift for u💐</h2>
+<h2>One Last Surprise 💐</h2>
 <p>I just wanted to make your birthday a little more special 🌸</p>
 <img src="photo.jpg">
 <button onclick="nextPage('page10')">Continue ➜</button>
@@ -572,9 +556,4 @@ function blowCandle(){
 </script>
 
 </body>
-
 </html>
-
-
-
-
