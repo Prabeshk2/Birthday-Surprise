@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Puja 🎂</title>
+
+<style>
+
+/* GLOBAL */
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#ffb6d9,#d6b3ff,#a8d8ff,#ffc6e6);
+background-size:400% 400%;
+animation:bgMove 18s ease infinite;
+overflow:hidden;
+text-align:center;
+color:black;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* PAGE SYSTEM */
+.page{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+#page1{display:flex}
+
+/* BUTTON */
+button{
+padding:12px 26px;
+border:none;
+border-radius:30px;
+background:#fa017d;
+color:white;
+font-size:18px;
+cursor:pointer;
+margin-top:20px;
+box-shadow:0 0 15px rgba(0,0,0,.2);
+}
+
+/* NEON NAME */
+.neon{
+font-size:42px;
+color:#161616;
+text-shadow:0 0 10px #fff,0 0 20px #ff4da6,0 0 40px #ff4da6;
+animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+from{text-shadow:0 0 10px #fff,0 0 20px #ff4da6;}
+to{text-shadow:0 0 20px #fff,0 0 40px #ff4da6;}
+}
+
+/* BALLOONS */
+.balloon{
+position:fixed;
+bottom:-120px;
+font-size:30px;
+animation:float 10s linear infinite;
+opacity:.9;
+}
+@keyframes float{
+0%{transform:translateY(0)}
+100%{transform:translateY(-120vh)}
+}
+
+/* FLOATING HEARTS */
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:20px;
+animation:floatUp 6s linear infinite;
+opacity:.9;
+pointer-events:none;
+color:white;
+}
+@keyframes floatUp{
+0%{transform:translateY(0);opacity:.9}
+100%{transform:translateY(-110vh);opacity:0}
+}
+
+/* GIFT */
+.gift{
+font-size:100px;
+cursor:pointer;
+animation:shake 1.5s infinite;
+}
+@keyframes shake{
+0%{transform:rotate(0)}
+25%{transform:rotate(3deg)}
+50%{transform:rotate(0)}
+75%{transform:rotate(-3deg)}
+100%{transform:rotate(0)}
+}
+
+/* LETTER */
+.letterCard,.finalCard{
+background:white;
+padding:25px;
+border-radius:18px;
+max-width:420px;
+box-shadow:0 15px 40px rgba(0,0,0,.2);
+display:none;
+}
+
+/* CONFETTI */
+.confetti{
+position:fixed;
+width:8px;
+height:14px;
+top:-20px;
+animation:fall 3s linear forwards;
+}
+@keyframes fall{
+to{transform:translateY(110vh) rotate(360deg);}
+}
+
+img{
+max-width:260px;
+border-radius:20px;
+margin-top:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+/* SCROLL LAST PAGE */
+#page4{
+overflow-y:auto;
+}
+
+/* GLOWING STARS */
+.star{
+position:fixed;
+width:4px;
+height:4px;
+border-radius:50%;
+background:#ff9be8;
+box-shadow:0 0 10px #ff9be8, 0 0 20px #c86bff;
+animation:twinkle 2s infinite alternate;
+pointer-events:none;
+}
+@keyframes twinkle{
+from{opacity:.3; transform:scale(.8);}
+to{opacity:1; transform:scale(1.4);}
+}
+
+/* FIREWORK */
+.firework{
+position:fixed;
+width:6px;
+height:6px;
+border-radius:50%;
+pointer-events:none;
+animation:firework 1.4s ease-out forwards;
+}
+@keyframes firework{
+0%{transform:scale(1);opacity:1;}
+100%{transform:scale(6);opacity:0;}
+}
+
+/* BOUQUET ANIMATION */
+#bouquet{
+font-size:120px;
+display:none;
+animation:bouquetPop 1.2s ease forwards;
+}
+@keyframes bouquetPop{
+0%{transform:scale(.3);opacity:0;}
+100%{transform:scale(1);opacity:1;}
+}
+
+/* ----------- CANDLE SYSTEM ----------- */
+
+.candle{
+width:6px;
+height:28px;
+background:#ffffff;
+border-radius:2px;
+position:relative;
+box-shadow:0 0 6px rgba(255,255,255,.9);
+}
+
+.flame{
+position:absolute;
+top:-14px;
+left:50%;
+transform:translateX(-50%);
+width:10px;
+height:14px;
+background:radial-gradient(circle,#fff 10%,#ffd54f 40%,#ff9800 70%,transparent 80%);
+border-radius:50%;
+animation:flicker .15s infinite alternate;
+filter:drop-shadow(0 0 6px #ff9800)
+drop-shadow(0 0 12px #ff5722)
+drop-shadow(0 0 18px #ffc107);
+}
+
+@keyframes flicker{
+from{transform:translateX(-50%) scale(1);}
+to{transform:translateX(-50%) scale(1.2);}
+}
+/* CAKE CUT AFTER BLOW */
+.cakeCut {
+  animation: cakeCutAnim 0.9s ease forwards;
+}
+
+@keyframes cakeCutAnim {
+  0% { transform: scale(1) rotate(0); }
+  40% { transform: scale(1.1) rotate(-5deg); }
+  100% { transform: scale(0) rotate(-25deg); opacity:0; }
+}
+
+
+</style>
+</head>
+
+<body onclick="playMusic()">
+
+<audio id="music" loop>
+<source src="music.mp3">
+</audio>
+
+<script>
+
+/* BALLOONS */
+for(let i=0;i<12;i++){
+let b=document.createElement("div");
+b.className="balloon";
+b.innerHTML="🎈";
+b.style.left=Math.random()*100+"%";
+b.style.animationDuration=(8+Math.random()*6)+"s";
+document.body.appendChild(b);
+}
+
+/* HEARTS */
+function createHeart(){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(15+Math.random()*25)+"px";
+h.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+}
+setInterval(createHeart,400);
+
+/* STARS */
+for(let i=0;i<40;i++){
+let s=document.createElement("div");
+s.className="star";
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+document.body.appendChild(s);
+}
+
+/* FIREWORK LOOP */
+function autoFirework(){
+let x=Math.random()*window.innerWidth;
+let y=Math.random()*window.innerHeight*0.6;
+
+for(let i=0;i<18;i++){
+let f=document.createElement("div");
+f.className="firework";
+f.style.left=x+"px";
+f.style.top=y+"px";
+
+let hue=300+Math.random()*60;
+f.style.background="hsl("+hue+",100%,65%)";
+f.style.boxShadow="0 0 12px hsl("+hue+",100%,70%)";
+
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),1400);
+}
+}
+setInterval(autoFirework,1800);
+
+</script>
+
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+<h1 class="neon">Puja Chhetri KC</h1>
+<h2>A Surprise For You 🎁</h2>
+<div class="gift" onclick="nextPage('page2')">🎁</div>
+<p>Tap the gift to begin the birthday surprise ✨</p>
+<p style="margin-top:8px;font-size:14px;opacity:0.8;">
+Tap anywhere on the page to begin the birthday countdown and unlock the surprise 🎂✨
+</p>
+</div>
+
+<!-- PAGE 2: REAL CANDLES WITH FLICKERING FLAMES -->
+<div class="page" id="page2">
+<h2>Make a Wish 🎂</h2>
+
+<div style="position:relative;font-size:120px;line-height:1; display:flex; flex-direction:column; align-items:center;">
+<!-- Cake -->
+<div id="cake" style="position:relative;">🎂</div>
+
+<!-- Candles container -->
+<div id="candles" style="position:absolute;top:-48px; display:flex; gap:14px;">
+  <div class="candle"><div class="flame"></div></div>
+  <div class="candle"><div class="flame"></div></div>
+  <div class="candle"><div class="flame"></div></div>
+</div>
+
+<!-- Smoke -->
+<div id="smoke" style="display:none;position:absolute;top:-60px;font-size:30px;">💨</div>
+</div>
+
+<button onclick="blowCandle()">Blow Candle</button>
+<div id="cakeSlice" style="display:none;font-size:70px;">🍰</div>
+<button onclick="nextPage('page3')">Next ➜</button>
+</div>
+
+<style>
+/* Candle body */
+.candle{
+  width:6px;
+  height:28px;
+  background:#ffffff;
+  border-radius:2px;
+  position:relative;
+  box-shadow:0 0 6px rgba(255,255,255,.9);
+}
+
+/* Flame */
+.flame{
+  position:absolute;
+  top:-14px;
+  left:50%;
+  transform:translateX(-50%);
+  width:10px;
+  height:14px;
+  background:radial-gradient(circle,#fff 10%,#ffd54f 40%,#ff9800 70%,transparent 80%);
+  border-radius:50%;
+  animation:flicker 0.15s infinite alternate;
+  filter:drop-shadow(0 0 6px #ff9800)
+        drop-shadow(0 0 12px #ff5722)
+        drop-shadow(0 0 18px #ffc107);
+}
+
+/* Independent flicker for each flame */
+.candle:nth-child(1) .flame{animation-duration:0.14s;}
+.candle:nth-child(2) .flame{animation-duration:0.16s;}
+.candle:nth-child(3) .flame{animation-duration:0.13s;}
+
+@keyframes flicker{
+  from{transform:translateX(-50%) scale(1);}
+  to{transform:translateX(-50%) scale(1.2);}
+}
+</style>
+
+<script>
+function blowCandle(){
+  document.querySelectorAll(".flame").forEach(f=>{
+    f.style.display="none";
+  });
+  document.getElementById("smoke").style.display="block";
+  document.getElementById("cakeSlice").style.display="block";
+  confetti();
+}
+</script>
+
+<!-- PAGE 3 TO PAGE 10 (UNCHANGED FROM ORIGINAL) -->
+
+<div class="page" id="page3">
+<h2>Letter For You 💌</h2>
+<div style="font-size:100px;cursor:pointer" onclick="openLetter()">✉️</div>
+<div class="letterCard" id="letter"></div>
+<button onclick="nextPage('page4')">Next ➜</button>
+</div>
+
+<div class="page" id="page4">
+<h1>Happy Birthday 🎂 
+</h1>
+<div style="font-size:100px;cursor:pointer" onclick="showFinalCard()">✉️</div>
+
+<div class="finalCard" id="finalCard">
+<h2>Happy Birthday Puja Chhetri KC 🎉</h2>
+<p>May your day be filled with happiness and soft beautiful moments 😊</p>
+<p>May your smile keep shining brighter with every passing year ✨</p>
+<p>May your dreams slowly turn into reality step by step 🌸</p>
+<p>May peace, success, and positivity always stay with you 🌷</p>
+<p>Thank you for coming into my life as a wonderful friend 💖</p>
+<p>Wishing you a truly sweet and meaningful birthday 🎂</p>
+</div>
+
+<button onclick="nextPage('page5')">More Surprise ➜</button>
+</div>
+
+<div class="page" id="page5">
+<h2>Why I'm Glad We Met 🌸</h2>
+<p>Talking with you feels easy and peaceful 😊</p>
+<p>You brought new positivity into my routine ✨</p>
+<p>Your presence makes conversations special 🌷</p>
+<button onclick="nextPage('page6')">Next ➜</button>
+</div>
+
+<div class="page" id="page6">
+<h2>This Is Just The Beginning 💫</h2>
+<p>We may not have many memories yet but the best ones are coming 🌸</p>
+<button onclick="nextPage('page7')">Next ➜</button>
+</div>
+
+<div class="page" id="page7">
+<h2>Secret Message 🤍</h2>
+<button onclick="showMessage()">Click if you're smiling</button>
+<p id="secretText" style="display:none;margin-top:20px;">
+Thank you for being part of my life 🤍<br>
+This is the first of many birthdays I hope to wish you 🎂
+</p>
+<button onclick="nextPage('page8')">Next ➜</button>
+</div>
+
+<div class="page" id="page8">
+<h2>Promise Notes 🤝</h2>
+<p>I promise to respect you always 🌸</p>
+<p>I promise to listen whenever you need 🎧</p>
+<p>I promise to make you smile on difficult days 😊</p>
+<p>I promise to stay genuine and supportive ✨</p>
+<button onclick="nextPage('page9')">Final Surprise ➜</button>
+</div>
+
+<div class="page" id="page9">
+<h2>One Last Surprise 💐</h2>
+<p>I just wanted to make your birthday a little more special 🌸</p>
+<img src="photo.jpg">
+<button onclick="nextPage('page10')">Continue ➜</button>
+</div>
+
+<div class="page" id="page10">
+<h2>Will You Celebrate With Me? 🌸</h2>
+<button id="yesBtn" onclick="showBouquet()">Yes 💖</button>
+<button id="noBtn" onclick="showNo()">No 🙂</button>
+
+<div id="bouquet">💐</div>
+<p id="yesMsg" style="display:none;margin-top:15px;">
+Yay! That means a lot to me 💖<br>
+This bouquet is just the beginning 💐<br>
+More smiles coming soon ✨
+</p>
+<p id="noMsg" style="display:none;margin-top:15px;">
+Still wishing you the happiest birthday ever 🎂
+</p>
+</div>
+
+<script>
+
+/* MUSIC */
+let played=false;
+function playMusic(){
+if(!played){
+document.getElementById("music").play();
+played=true;
+}
+}
+
+/* PAGE SWITCH */
+function nextPage(id){
+document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+document.getElementById(id).style.display="flex";
+}
+
+/* FINAL CARD */
+function showFinalCard(){
+document.getElementById("finalCard").style.display="block";
+}
+
+/* CONFETTI */
+function confetti(){
+for(let i=0;i<90;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.style.left=Math.random()*100+"%";
+c.style.background="hsl("+Math.random()*360+",100%,60%)";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),3000);
+}
+}
+
+/* LETTER TYPE */
+const message = `
+Thanks for existing in my life as my friend 💫
+You came into my life quietly but made everything brighter 🌸
+Even without many memories yet your friendship already feels special ✨
+Your kindness makes conversations peaceful 🤍
+I truly appreciate your presence in my life 🌷
+I hope our friendship keeps growing beautifully 🤝
+`;
+
+let i=0;
+function openLetter(){
+let box=document.getElementById("letter");
+box.style.display="block";
+if(box.innerHTML===""){ typeWriter(); }
+}
+function typeWriter(){
+if(i<message.length){
+document.getElementById("letter").innerHTML+=message.charAt(i);
+i++;
+setTimeout(typeWriter,35);
+}
+}
+
+/* SECRET */
+function showMessage(){
+document.getElementById("secretText").style.display="block";
+}
+
+/* NEW BOUQUET LOGIC */
+function showBouquet(){
+document.getElementById("bouquet").style.display="block";
+document.getElementById("yesMsg").style.display="block";
+confetti();
+document.getElementById("noBtn").disabled = true;
+}
+function showNo(){
+document.getElementById("noMsg").style.display="block";
+document.getElementById("yesBtn").disabled = true;
+}
+
+function blowCandle(){
+  // remove flames
+  document.querySelectorAll(".flame").forEach(f=>{
+    f.style.display="none";
+  });
+
+  // show smoke
+  document.getElementById("smoke").style.display="block";
+
+  // cake cut animation
+  let cake = document.getElementById("cake");
+  cake.classList.add("cakeCut");
+
+  // show cake slice after cut
+  setTimeout(()=>{
+    document.getElementById("cakeSlice").style.display="block";
+  },900);
+
+  confetti();
+}
+
+</script>
+
+</body>
+</html>
